@@ -14,3 +14,8 @@ the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Local path and credential redaction with residual-risk warnings.
 - Read-only GitHub Action for report validation.
 - Codex triage skill for human-reviewed diagnostic analysis.
+
+### Fixed
+
+- Canonical filesystem aliases are redacted before reports are written.
+- Test discovery remains compatible with Node.js 20 across supported platforms.

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { mkdir, mkdtemp, realpath, rm, symlink } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -90,6 +91,27 @@ test("replaces workspace, home, drive, UNC, and Unix user paths", () => {
   assert.match(result.value, /<ABS_PATH>/);
   assert.match(result.value, /<UNC_PATH>/);
   assert.equal(/alice|bob|private\.txt/.test(result.value), false);
+});
+
+test("redacts lexical and canonical workspace aliases", { skip: process.platform === "win32" }, async (context) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "repropack canonical "));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const target = path.join(root, "target");
+  const alias = path.join(root, "alias");
+  await mkdir(target);
+  await symlink(target, alias, "dir");
+  const canonicalTarget = await realpath(target);
+  const result = redactText([
+    alias,
+    canonicalTarget,
+    path.join(canonicalTarget, "file.ts"),
+  ].join("\n"), { workspace: alias, environment: {} });
+  assert.equal(result.value, [
+    "<WORKSPACE>",
+    "<WORKSPACE>",
+    path.join("<WORKSPACE>", "file.ts"),
+  ].join("\n"));
+  assert.equal(result.categories["workspace-path"], 3);
 });
 
 test("removes ANSI, OSC, C0, C1, and directional controls while preserving Unicode", () => {

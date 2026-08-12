@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { writeFile } from "node:fs/promises";
+import { mkdir, rm, symlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 
@@ -28,6 +28,23 @@ test("captures literal argv without shell interpolation", async () => {
   ]));
   assert.equal(result.report.command.exitCode, 0);
   assert.equal(result.report.output.stdout, metacharacters);
+  assert.equal(result.report.output.stderr, "<WORKSPACE>");
+  assert.equal(result.report.command.cwd, "<WORKSPACE>");
+});
+
+test("redacts a child process cwd reached through a workspace alias", { skip: process.platform === "win32" }, async (context) => {
+  const root = await temporaryDirectory("repropack alias ");
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const target = path.join(root, "target");
+  const alias = path.join(root, "alias");
+  await mkdir(target);
+  await symlink(target, alias, "dir");
+  const result = await captureCommand(options(alias, [
+    process.execPath,
+    "-e",
+    "process.stderr.write(process.cwd());",
+  ]));
+  assert.equal(result.report.command.exitCode, 0);
   assert.equal(result.report.output.stderr, "<WORKSPACE>");
   assert.equal(result.report.command.cwd, "<WORKSPACE>");
 });

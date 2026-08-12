@@ -1,3 +1,4 @@
+import { realpathSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
@@ -73,8 +74,19 @@ function replaceLiteral(
 
 function pathVariants(value: string): string[] {
   const resolved = path.resolve(value);
-  return [...new Set([resolved, resolved.replaceAll("\\", "/"), resolved.replaceAll("/", "\\")])]
-    .sort((left, right) => right.length - left.length);
+  const roots = [resolved];
+  try {
+    roots.push(realpathSync.native(resolved));
+  } catch {
+    // Nonexistent or inaccessible paths still retain their lexical variants.
+  }
+
+  const variants = roots.flatMap((root) => [
+    root,
+    root.replaceAll("\\", "/"),
+    root.replaceAll("/", "\\"),
+  ]);
+  return [...new Set(variants)].sort((left, right) => right.length - left.length);
 }
 
 function redactPaths(input: string, context: RedactionContext, state: MutableRedactionState): string {
