@@ -1,0 +1,85 @@
+name: Bug report
+description: Report reproducible incorrect behavior in ReproPack.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Search existing issues first.
+
+        **Do not paste real secrets, private logs, identifying paths, or an unreviewed `.repropack.json` file.** Use GitHub private vulnerability reporting for a possible security issue or redaction bypass.
+
+  - type: input
+    id: version
+    attributes:
+      label: ReproPack version
+      description: Run `repropack --version` or provide the exact package version.
+      placeholder: 0.x.y
+    validations:
+      required: true
+
+  - type: input
+    id: node_version
+    attributes:
+      label: Node.js version
+      description: Run `node --version`.
+      placeholder: v22.x.y
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operating_system
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - Linux
+        - macOS
+        - Other supported Node.js platform
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Use synthetic inputs and remove private repository details. Preserve argv boundaries when listing a command.
+      placeholder: |
+        1. Create ...
+        2. Run: repropack ...
+        3. Observe ...
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect ReproPack to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Redact all diagnostic text before pasting it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add safe, relevant details such as the shell or package manager. Do not upload private reports.
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I reviewed this issue and removed credentials, private logs, usernames, hostnames, repository URLs, and identifying paths.
+          required: true
+        - label: This is not a vulnerability or suspected redaction bypass.
+          required: true

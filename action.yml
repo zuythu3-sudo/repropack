@@ -1,0 +1,20 @@
+name: ReproPack Validate
+description: Validate a local ReproPack diagnostic report without executing its contents.
+author: ReproPack contributors
+
+inputs:
+  path:
+    description: Path to a .repropack.json file inside the checked-out workspace.
+    required: true
+  strict:
+    description: Treat residual redaction warnings as validation errors.
+    required: false
+    default: "true"
+
+runs:
+  using: node24
+  main: packages/action/dist/index.js
+
+branding:
+  icon: shield
+  color: blue

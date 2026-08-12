@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Verify and publish
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: npm
+
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Require an exact package version tag
+        run: >-
+          node -e "const fs=require('node:fs');const pkg=JSON.parse(fs.readFileSync('packages/cli/package.json','utf8'));const expected='v'+pkg.version;if(process.env.GITHUB_REF_NAME!==expected){console.error('Tag must exactly match '+expected);process.exit(1)}"
+
+      - name: Run checks
+        run: npm run check
+
+      - name: Verify committed Action bundle
+        shell: bash
+        run: |
+          status="$(git status --porcelain --untracked-files=all -- packages/action/dist)"
+          if [[ -n "$status" ]]; then
+            printf '%s\n' "$status"
+            echo "The committed Action bundle is out of date."
+            exit 1
+          fi
+
+      - name: Inspect package contents
+        run: npm pack --workspace repropack-cli --dry-run
+
+      - name: Publish package
+        run: npm publish --workspace repropack-cli --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

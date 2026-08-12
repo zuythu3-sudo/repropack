@@ -1,0 +1,17 @@
+{
+  "name": "repropack-action",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist --minify",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@actions/core": "^3.0.1",
+    "repropack-cli": "0.1.0"
+  }
+}

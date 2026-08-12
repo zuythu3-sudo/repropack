@@ -1,0 +1,28 @@
+{
+  "name": "repropack-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build -w repropack-cli && npm run build -w repropack-action",
+    "build:cli": "npm run build -w repropack-cli",
+    "clean": "node scripts/clean.mjs",
+    "typecheck": "npm run typecheck -w repropack-cli && npm run build:cli && npm run typecheck -w repropack-action",
+    "test": "npm run build:cli && c8 --check-coverage --branches 80 --functions 80 --lines 80 --statements 80 --include packages/cli/dist/**/*.js node --test \"tests/**/*.test.mjs\"",
+    "test:security": "npm run build:cli && c8 --check-coverage --branches 90 --functions 90 --lines 90 --statements 90 --include packages/cli/dist/redaction.js node --test \"tests/security/**/*.test.mjs\"",
+    "check": "npm run typecheck && npm test && npm run test:security && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@vercel/ncc": "^0.38.3",
+    "c8": "^10.1.3",
+    "fast-check": "^4.2.0",
+    "typescript": "^5.9.2"
+  }
+}

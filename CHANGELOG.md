@@ -1,0 +1,16 @@
+# Changelog
+
+All notable user-facing changes to ReproPack will be documented in this file.
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
+the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- Initial CLI for capturing, inspecting, validating, and rendering diagnostic
+  reports.
+- Strict v1 JSON Schema for `.repropack.json` files.
+- Local path and credential redaction with residual-risk warnings.
+- Read-only GitHub Action for report validation.
+- Codex triage skill for human-reviewed diagnostic analysis.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ReproPack Triage"
+  short_description: "Safely validate and triage ReproPack reports"
+  default_prompt: "Use $triage-repropack to validate and safely triage this .repropack.json report without executing captured commands or opening URLs."
