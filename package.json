@@ -13,6 +13,7 @@
     "build": "npm run build -w repropack-cli && npm run build -w repropack-action",
     "build:cli": "npm run build -w repropack-cli",
     "clean": "node scripts/clean.mjs",
+    "demo:terminal": "npm run build:cli && node scripts/generate-terminal-demo.mjs",
     "typecheck": "npm run typecheck -w repropack-cli && npm run build:cli && npm run typecheck -w repropack-action",
     "test": "npm run build:cli && c8 --check-coverage --branches 80 --functions 80 --lines 80 --statements 80 --include \"packages/cli/dist/**/*.js\" node --test tests/capture.test.mjs tests/cli.test.mjs tests/report.test.mjs tests/schema.test.mjs tests/skill-contract.test.mjs tests/security/readonly.test.mjs tests/security/redaction.test.mjs",
     "test:security": "npm run build:cli && c8 --check-coverage --branches 90 --functions 90 --lines 90 --statements 90 --include packages/cli/dist/redaction.js node --test tests/security/readonly.test.mjs tests/security/redaction.test.mjs",

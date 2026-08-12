@@ -11,3 +11,4 @@ packages/action/.ncc-cache/
 # Local reports may contain diagnostic data.
 *.repropack.json
 !.github/fixtures/*.repropack.json
+!examples/failure.repropack.json
