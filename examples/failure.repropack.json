@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "producer": {
+    "name": "repropack",
+    "version": "0.1.0"
+  },
+  "createdAt": "2026-08-12T00:00:00.000Z",
+  "command": {
+    "argv": [
+      "node",
+      "examples/synthetic-failure.mjs"
+    ],
+    "cwd": "<WORKSPACE>",
+    "exitCode": 7,
+    "signal": null,
+    "durationMs": 50,
+    "timedOut": false
+  },
+  "environment": {
+    "platform": "win32",
+    "release": "10.0.26100",
+    "arch": "x64",
+    "nodeVersion": "v24.16.0",
+    "npmVersion": "11.13.0"
+  },
+  "repository": {
+    "commit": null,
+    "dirty": null,
+    "packageManager": "npm",
+    "lockfile": {
+      "name": "package-lock.json",
+      "sha256": "929577eff62b37b9fea8457a2f9444f0b2eacf0862aa15d7dbb6b6773beb00bd"
+    }
+  },
+  "output": {
+    "stdout": "Checking synthetic project\n",
+    "stderr": "Authorization: <REDACTED:authorization>\nWorkspace: <WORKSPACE>\nError: synthetic fixture failed\n",
+    "stdoutTruncated": false,
+    "stderrTruncated": false,
+    "encodingIssues": false
+  },
+  "redaction": {
+    "total": 3,
+    "categories": {
+      "workspace-path": 2,
+      "authorization": 1
+    },
+    "residualWarnings": []
+  }
+}

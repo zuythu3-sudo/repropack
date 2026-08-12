@@ -17,8 +17,7 @@ rejected.
 
 ## Workflow shape
 
-After the repository has a versioned release, pin that release or an immutable
-commit in the `uses:` value:
+Pin a versioned release or an immutable commit in the `uses:` value:
 
 ```yaml
 name: Validate ReproPack report
@@ -35,14 +34,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Validate report
-        uses: OWNER/repropack@VERSION
+        uses: zuythu3-sudo/repropack@v0.1.0
         with:
           path: examples/failure.repropack.json
           strict: true
 ```
 
-Replace `OWNER` and `VERSION` with the repository owner and a published tag or
-commit. The source tree intentionally does not guess a final hosting coordinate.
+For a stricter supply-chain policy, replace the version tag with the immutable
+commit SHA associated with the release.
 
 ## Trust guidance
 

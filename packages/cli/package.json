@@ -4,6 +4,28 @@
   "description": "Create reviewable, redacted diagnostic reports from failing commands.",
   "type": "module",
   "license": "Apache-2.0",
+  "author": "zuythu3-sudo",
+  "homepage": "https://github.com/zuythu3-sudo/repropack#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuythu3-sudo/repropack.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/zuythu3-sudo/repropack/issues"
+  },
+  "keywords": [
+    "diagnostics",
+    "debugging",
+    "cli",
+    "redaction",
+    "privacy",
+    "bug-report",
+    "reproducibility"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=20"
   },

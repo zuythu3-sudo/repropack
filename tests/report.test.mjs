@@ -6,6 +6,7 @@ import test from "node:test";
 import {
   inspectSummary,
   renderGithub,
+  validateReport,
   writeReportFile,
 } from "../packages/cli/dist/index.js";
 import {
@@ -97,4 +98,15 @@ test("initializes project files without overwriting", async () => {
 
   const plain = await temporaryDirectory();
   assert.equal((await initializeProject(plain, false)).length, 1);
+});
+
+test("checked-in example remains valid and matches the renderer", async () => {
+  const reportText = await readFile(new URL("../examples/failure.repropack.json", import.meta.url), "utf8");
+  const markdown = await readFile(new URL("../examples/failure.github.md", import.meta.url), "utf8");
+  const report = JSON.parse(reportText);
+  const validation = await validateReport(report, { strict: true });
+  assert.equal(validation.valid, true);
+  assert.deepEqual(validation.errors, []);
+  assert.equal(renderGithub(report), markdown.replaceAll("\r\n", "\n"));
+  assert.doesNotMatch(reportText, /demo-token-123456/);
 });

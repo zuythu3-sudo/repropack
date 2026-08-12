@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://repropack.dev/schema/v1/repropack.schema.json",
+  "$id": "https://raw.githubusercontent.com/zuythu3-sudo/repropack/v0.1.0/packages/cli/schema/repropack.schema.json",
   "title": "ReproPack diagnostic report",
   "type": "object",
   "additionalProperties": false,

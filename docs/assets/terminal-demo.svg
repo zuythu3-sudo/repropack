@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="520" viewBox="0 0 1180 520" role="img" aria-labelledby="title description">
+  <title id="title">ReproPack terminal demo</title>
+  <desc id="description">A synthetic failure is captured, redacted, inspected, and strictly validated.</desc>
+  <style>
+    .slide { opacity: 0; animation: show 15s infinite; }
+    .s2 { animation-delay: 5s; }
+    .s3 { animation-delay: 10s; }
+    text { fill: #d8e2ee; font: 18px Consolas, "Cascadia Mono", ui-monospace, monospace; }
+    @keyframes show { 0%, 30% { opacity: 1; } 33.333%, 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .slide { animation: none; opacity: 0; } .s3 { opacity: 1; } }
+  </style>
+  <rect width="1180" height="520" rx="18" fill="#08121e"/>
+  <rect x="1" y="1" width="1178" height="518" rx="17" fill="none" stroke="#2b4054" stroke-width="2"/>
+  <circle cx="38" cy="30" r="7" fill="#ff5f57"/><circle cx="62" cy="30" r="7" fill="#febc2e"/><circle cx="86" cy="30" r="7" fill="#28c840"/>
+  <g class="slide s1"><text x="48" y="78"><tspan x="48" dy="0">$ repropack capture --yes --output failure.repropack.json -- node synthetic-failure.mjs</tspan><tspan x="48" dy="27">Privacy preview</tspan><tspan x="48" dy="27">  Command arguments: 2</tspan><tspan x="48" dy="27">  stdout: 30 bytes</tspan><tspan x="48" dy="27">  stderr: 67 bytes</tspan><tspan x="48" dy="27">  Redactions: 5</tspan><tspan x="48" dy="27">  Residual warnings: none</tspan><tspan x="48" dy="27">  Destination: &lt;DEMO_DIR&gt;\failure.repropack.json</tspan><tspan x="48" dy="27">  Output content is not shown in this preview. Inspect the report before sharing it.</tspan><tspan x="48" dy="27">Wrote &lt;DEMO_DIR&gt;\failure.repropack.json</tspan></text></g><g class="slide s2"><text x="48" y="78"><tspan x="48" dy="0">$ repropack inspect failure.repropack.json --show-output</tspan><tspan x="48" dy="27">ReproPack 1.0.0</tspan><tspan x="48" dy="27">Created: &lt;TIMESTAMP&gt;</tspan><tspan x="48" dy="27">Command: ["&lt;ABS_PATH&gt;","&lt;WORKSPACE&gt;\\synthetic-failure.mjs"]</tspan><tspan x="48" dy="27">Exit code: 7</tspan><tspan x="48" dy="27">Platform: &lt;PLATFORM&gt; &lt;ARCH&gt;</tspan><tspan x="48" dy="27">Redactions: 5</tspan><tspan x="48" dy="27">stdout: 30 bytes</tspan><tspan x="48" dy="27">stderr: 67 bytes</tspan><tspan x="48" dy="27"></tspan><tspan x="48" dy="27">--- stdout ---</tspan><tspan x="48" dy="27">Bundling synthetic project...</tspan><tspan x="48" dy="27"></tspan><tspan x="48" dy="27">--- stderr ---</tspan><tspan x="48" dy="27">Error: build failed in &lt;WORKSPACE&gt;</tspan><tspan x="48" dy="27">api_key=&lt;REDACTED:openai-token&gt;</tspan></text></g><g class="slide s3"><text x="48" y="78"><tspan x="48" dy="0">$ repropack validate failure.repropack.json --strict</tspan><tspan x="48" dy="27">Report is valid.</tspan><tspan x="48" dy="27"></tspan><tspan x="48" dy="27">[OK] Strict validation passed</tspan></text></g>
+</svg>

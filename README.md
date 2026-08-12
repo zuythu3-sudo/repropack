@@ -4,23 +4,26 @@
 [![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-339933.svg)](https://nodejs.org/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-2563eb.svg)](LICENSE)
 
-![ReproPack turns failing command output into a redacted JSON diagnostic report.](docs/assets/social-preview.png)
+ReproPack turns raw command failures into bounded, redacted diagnostics you can
+review before sharing.
 
-ReproPack turns a failing command into a reviewable, redacted diagnostic report.
+**Local only · No telemetry · Report readers never execute captured commands**
 
-It captures the command result, a small set of runtime facts, repository state, and
-bounded output in one `.repropack.json` file. The report can be inspected before it
-is shared and validated without running the captured command.
+![A failing npm test becomes a reviewable ReproPack report with command, environment, output, and redaction sections.](docs/assets/social-preview-v2.jpg)
+
+It captures the command result, a small set of runtime facts, repository state,
+and limited output in one `.repropack.json` file. You can inspect the report
+before sharing it and validate it without running the captured command.
 
 > ReproPack reduces accidental disclosure; it cannot prove that a report is free
 > of sensitive information. Always review a report before publishing it.
 
-## Quick start
+## Try it
 
 ReproPack requires Node.js 20 or newer.
 
 ```sh
-npm install --global repropack-cli
+npm install --global repropack-cli@0.1.0
 
 # Everything after -- is passed directly to the program.
 repropack capture --output failure.repropack.json -- npm test
@@ -32,6 +35,24 @@ repropack validate failure.repropack.json --strict
 # Produce Markdown suitable for a GitHub issue.
 repropack render failure.repropack.json --format github
 ```
+
+Before writing a report, `capture` displays a privacy preview without revealing
+the captured output:
+
+```text
+Privacy preview
+  Command arguments: 2
+  stdout: 27 bytes
+  stderr: 95 bytes
+  Redactions: 3
+  Residual warnings: none
+```
+
+[View a synthetic report](examples/failure.repropack.json) or its
+[rendered GitHub Markdown](examples/failure.github.md) without running anything.
+The full test matrix covers Windows, Linux, and macOS on Node.js 20, 22, and 24.
+
+![ReproPack captures, redacts, inspects, and validates a synthetic failure.](docs/assets/terminal-demo.svg)
 
 `capture` preserves argument boundaries and starts native executables with shell
 handling disabled. Windows `.cmd` and `.bat` wrappers use the operating-system
