@@ -107,6 +107,6 @@ test("checked-in example remains valid and matches the renderer", async () => {
   const validation = await validateReport(report, { strict: true });
   assert.equal(validation.valid, true);
   assert.deepEqual(validation.errors, []);
-  assert.equal(renderGithub(report), markdown);
+  assert.equal(renderGithub(report), markdown.replaceAll("\r\n", "\n"));
   assert.doesNotMatch(reportText, /demo-token-123456/);
 });
