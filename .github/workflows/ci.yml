@@ -69,7 +69,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Run maintainer checks
-        uses: zuythu3-sudo/codex-oss-kit@v0.2.0
+        uses: zuythu3-sudo/codex-oss-kit@v0.3.0
         with:
           checks: all
           lang: zh
