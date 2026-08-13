@@ -6,6 +6,11 @@ the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Repository `AGENTS.md` for Codex maintainer workflows
+- Pull request template
+
 ## [0.1.0] - 2026-08-12
 
 ### Added
