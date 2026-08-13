@@ -58,3 +58,17 @@ jobs:
             echo "The committed Action bundle is out of date."
             exit 1
           fi
+
+  maintainer-kit:
+    name: Codex OSS kit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Run maintainer checks
+        uses: zuythu3-sudo/codex-oss-kit@v0.1.3
+        with:
+          checks: all
