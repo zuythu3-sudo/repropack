@@ -11,7 +11,7 @@ the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Repository `AGENTS.md` for Codex maintainer workflows
 - Pull request template
 - CI job that runs `zuythu3-sudo/codex-oss-kit` maintainer checks
-- Pin the maintainer-check Action to `v0.3.0`
+- Pin the maintainer-check Action to `v0.3.1`
 
 ## [0.1.0] - 2026-08-12
 
